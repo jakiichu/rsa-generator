@@ -6,7 +6,7 @@ export interface iFormData {
 export interface iQrPayload {
   userId: string;
   deviceId: string;
-  timestamp: number;
+  timestamp: string;
 }
 
 export interface iCryptoResult {
@@ -22,7 +22,7 @@ export interface iModalProps {
 }
 
 export interface iHeaderProps {
-  timestamp: number;
+  timestamp: string;
   hasKey: boolean;
   onOpenModal: () => void;
 }
@@ -30,7 +30,7 @@ export interface iHeaderProps {
 export interface iFormPanelProps {
   userId: string;
   deviceId: string;
-  timestamp: number;
+  timestamp: string;
   error: string | null;
   isLoading: boolean;
   onUserIdChange: (v: string) => void;

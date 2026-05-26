@@ -16,10 +16,11 @@ const App = () => {
   const [qrDataUrl, setQrDataUrl] = createSignal<string | null>(null);
   const [isLoading, setIsLoading] = createSignal(false);
   const [error, setError] = createSignal<string | null>(null);
-  const [timestamp, setTimestamp] = createSignal(Date.now());
+  const [timestamp, setTimestamp] = createSignal(new Date().toISOString());
 
+  console.log('qwe')
   onMount(() => {
-    const id = setInterval(() => setTimestamp(Date.now()), 100);
+    const id = setInterval(() => setTimestamp(new Date().toISOString()), 100);
     onCleanup(() => clearInterval(id));
   });
 
@@ -38,14 +39,14 @@ const App = () => {
     setError(null);
 
     try {
-      const ts = Date.now();
+      const ts = new Date().toISOString();
       const payload = `${userId.trim()}:${deviceId.trim()}:${ts}`;
       const encrypted = await encryptWithRsa(payload, publicKey());
       const dataUrl = await QRCode.toDataURL(encrypted, {
-        errorCorrectionLevel: 'L',
+        errorCorrectionLevel: 'H',
         width: 300,
         margin: 1,
-        color: { dark: '#00d4ff', light: '#0a0a14' },
+        color: { dark: '#ffffff', light: '#0a0a14' },
       });
       setQrDataUrl(dataUrl);
     } catch (e) {
